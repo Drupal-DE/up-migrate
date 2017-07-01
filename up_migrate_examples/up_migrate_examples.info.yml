@@ -1,0 +1,7 @@
+type: module
+name: 'undpaul Migrate Examples'
+description: 'Migration examples'
+package: Migration
+core: 8.x
+dependencies:
+  - up_migrate:up_migrate

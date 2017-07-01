@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @file
+ * Main functions for "undpaul Migrate".
+ */
+
+/**
+ * Implements hook_migration_plugins_alter().
+ */
+function up_migrate_migration_plugins_alter(&$definitions) {
+  foreach ($definitions as $id => $configuration) {
+    if (!empty($definitions[$id]['idMap'])) {
+      // Do not override existing values.
+      continue;
+    }
+    // Override id map for each migration.
+    $definitions[$id]['idMap'] = [
+      'plugin' => 'fastsql',
+    ];
+  }
+}

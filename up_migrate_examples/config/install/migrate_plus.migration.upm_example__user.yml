@@ -1,0 +1,47 @@
+id: upm_example__user
+label: User accounts
+migration_group: up_examples
+destination:
+  plugin: entity:user
+source:
+  plugin: 'upm_examples__user'
+  # Use database with key "upm_example".
+  # To register the database use "drush upm-da upm_example {database-name} ...".
+  key: upm_example
+  # Define base table for user data. This could be done in the source plugin
+  # also.
+  # @see \Drupal\up_migrate_examples\Plugin\migrate\source\UserAccounts
+  table:
+    name: users
+    alias: u
+    ids:
+      uid: integer
+  track_changes: true
+  constants:
+    langcode: 'de'
+process:
+  uid: uid
+  name: name
+  pass: pass
+  mail: mail
+  created: created
+  access: access
+  login: login
+  status: status
+  timezone: timezone
+  langcode: 'constants/langcode'
+  preferred_langcode: 'constants/langcode'
+  preferred_admin_langcode: 'constants/langcode'
+  init: init
+  roles:
+    plugin: static_map
+    source: roles
+    map:
+      1: anonymous
+      2: authenticated
+      3: administrator
+    default_value: authenticated
+dependencies:
+  enforced:
+    module:
+      - up_migrate_examples

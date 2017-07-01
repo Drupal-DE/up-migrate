@@ -1,0 +1,12 @@
+id: up_examples
+label: undpaul Migration examples
+description: Some examples for custom migrations.
+source_type: Custom tables
+shared_configuration:
+  source:
+    # Set default idMap plugin.
+    id_map: fast_sql
+dependencies:
+  enforced:
+    module:
+      - up_migrate_examples
