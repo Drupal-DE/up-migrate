@@ -64,7 +64,3 @@ Example for definition in custom source plugin (must extend `SqlBase`)
      */
 
 For more complex ID definitions simply override the function `getIds()`.
-
-#### UserMerge
-
-@todo
