@@ -64,3 +64,14 @@ Example for definition in custom source plugin (must extend `SqlBase`)
      */
 
 For more complex ID definitions simply override the function `getIds()`.
+
+### Stream wrapper
+
+_up_migrate_ provides a custom read-only stream wrapper to access files needed
+for migrations in a handy way.
+
+To setup the correct directoy to your migration files, add the following code to
+your _settings.php_
+
+    // Set private folder.
+    $settings['file_migration_source_path'] = '/path/to/migration/files';
