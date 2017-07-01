@@ -7,13 +7,10 @@ This project aims to give you a jump-start on building migrations.
 Clone the project into `modules/custom` of your Drupal installation and run
 `composer install` within the modules directory.
 
-### Adding additional databases as migration source
-
-`drush upm-da {key} {database name} --username={name} --password={password}`
-
 ## Usage
 
-_up_migrate_ comes with some base classes usefull for building migrations.
+_up_migrate_ comes with some base classes and tools useful for building
+migrations.
 
 ### ID maps
 
@@ -33,7 +30,7 @@ _up_migrate_ comes with a set of pre-defined source plugins.
 
 The abstract class `\Drupal\up_migrate\Plugin\migrate\source\SqlBase` is meant
 to be the parent class for all custom migration sources. It allows configuring
-sources from directly within a migration yml file.
+sources from directly within a migration yml-file.
 
 Example for definition in _migrate_plus.migration.{id}.yml_:
 
@@ -64,6 +61,25 @@ Example for definition in custom source plugin (must extend `SqlBase`)
      */
 
 For more complex ID definitions simply override the function `getIds()`.
+
+### Adding additional databases as migration source
+
+Usually you want to migrate data from one or more existing databases to your new
+site. To be able to reference these source databases in your migrations, simply
+run the following drush command
+
+    drush upm-da {key} {database name} --username={name} --password={password}
+
+For more information about the command and its options run `drush help upm-da`.
+
+In your migration yml-file (or in your source class) set the key of the database
+to use
+
+    source:
+      key: 'database-key-from-above'
+
+The source plugin `SqlBase` will automatically switch to the new database and
+fetch all data from there.
 
 ### Stream wrapper
 
