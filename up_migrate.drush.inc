@@ -5,7 +5,6 @@
  * Command-line tools for "undpaul Migrate".
  */
 
-use Drupal\Core\Config\ConfigInstaller;
 use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Config\InstallStorage;
 use Drupal\Core\Config\StorageInterface;
@@ -84,7 +83,7 @@ function up_migrate_drush_command_alter(&$command) {
  * @param string $type
  *   (optional) The extension type.
  *
- * @see ConfigInstaller::installDefaultConfig()
+ * @see \Drupal\Core\Config\ConfigInstaller::installDefaultConfig()
  */
 function drush_up_migrate_config_refresh($name, $type = 'module') {
   if (!in_array($type, ['module', 'theme', 'profile'])) {
@@ -142,13 +141,13 @@ function drush_up_migrate_config_refresh($name, $type = 'module') {
 /**
  * Gets configuration data from the provided storage.
  *
- * @param StorageInterface $storage
+ * @param \Drupal\Core\Config\StorageInterface $storage
  *   The configuration storage to read configuration from.
  * @param string $collection
  *   The configuration collection to use.
  * @param string $prefix
  *   (optional) Limit to configuration starting with the provided string.
- * @param StorageInterface[] $profile_storages
+ * @param \Drupal\Core\Config\StorageInterface[] $profile_storages
  *   An array of storage interfaces containing profile configuration to check
  *   for overrides.
  *
