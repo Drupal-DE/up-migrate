@@ -5,7 +5,6 @@ namespace Drupal\up_migrate\Plugin\migrate\process;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\Plugin\migrate\process\MigrationLookup;
 use Drupal\migrate\Plugin\MigrateIdMapInterface;
-use Drupal\migrate\Plugin\MigrationInterface;
 use Drupal\migrate\Row;
 
 /**
@@ -45,7 +44,7 @@ class MergeMigrationLookup extends MigrationLookup {
     $self = FALSE;
     $destination_ids = NULL;
     $source_id_values = [];
-    /** @var MigrationInterface[] $migrations */
+    /** @var \Drupal\migrate\Plugin\MigrationInterface[] $migrations */
     $migrations = $this->migrationPluginManager->createInstances($migration_ids);
     foreach ($migrations as $migration_id => $migration) {
       if ($migration_id == $this->migration->id()) {
