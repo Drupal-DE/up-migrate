@@ -45,10 +45,7 @@ abstract class SqlBase extends CoreSqlBase {
     // Now we can safely call the parent constructor.
     parent::__construct($configuration, $plugin_id, $plugin_definition, $migration, $state);
 
-    if (($this->table = $this->getConfig('table')) === NULL || empty($this->table['name'])) {
-      // No table defined as source for user data.
-      throw new MigrateException('No source table defined. Set this in the migration yml file or in the source plugin.');
-    }
+    $this->prepareTableInfo();
   }
 
   /**
@@ -70,6 +67,10 @@ abstract class SqlBase extends CoreSqlBase {
   public function fields() {
     // Define base fields for user accounts.
     $fields = [];
+
+    foreach ($this->getTableFields() as $field => $label) {
+      $fields[$field] = $label;
+    }
 
     // Add required fields from extending classes.
     $this->alterFields($fields);
@@ -110,7 +111,7 @@ abstract class SqlBase extends CoreSqlBase {
    * @param array $fields
    *   List of fields available for migration.
    */
-  protected function alterFields(array $fields = []) {
+  protected function alterFields(array &$fields = []) {
     // Give extending classes the possibility to alter or add fields.
   }
 
@@ -186,6 +187,27 @@ abstract class SqlBase extends CoreSqlBase {
   }
 
   /**
+   * Prepare information of base table.
+   *
+   * @throws \Drupal\migrate\MigrateException
+   */
+  protected function prepareTableInfo() {
+    if (($this->table = $this->getConfig('table')) === NULL || empty($this->table['name'])) {
+      // No table defined as source for user data.
+      throw new MigrateException('No source table defined. Set this in the migration yml file or in the source plugin.');
+    }
+    if (!isset($this->table['ids']) || !is_array($this->table['ids'])) {
+      $this->table['ids'] = [];
+    }
+    if (!isset($this->table['fields']) || !is_array($this->table['fields'])) {
+      $this->table['fields'] = [];
+    }
+    if (empty($this->table['alias'])) {
+      $this->table['alias'] = $this->table['name'];
+    }
+  }
+
+  /**
    * Get the base table name for the migration query.
    *
    * @return string
@@ -202,7 +224,17 @@ abstract class SqlBase extends CoreSqlBase {
    *   Alias of base table.
    */
   protected function getTableAlias() {
-    return empty($this->table['alias']) ? $this->table['name'] : $this->table['alias'];
+    return $this->table['alias'];
+  }
+
+  /**
+   * Get fields defined in migration yml or source plugin.
+   *
+   * @return array
+   *   List of field labels keyed by field name.
+   */
+  protected function getTableFields() {
+    return $this->table['fields'];
   }
 
 }

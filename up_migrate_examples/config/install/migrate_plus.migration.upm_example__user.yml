@@ -16,6 +16,11 @@ source:
     alias: u
     ids:
       uid: integer
+    fields:
+      uid: 'User ID'
+      name: 'Username'
+      pass: 'Password'
+      mail: 'Email address'
   track_changes: true
   constants:
     langcode: 'de'

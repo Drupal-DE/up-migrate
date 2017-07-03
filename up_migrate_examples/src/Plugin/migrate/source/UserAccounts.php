@@ -33,11 +33,8 @@ class UserAccounts extends SqlBase {
   /**
    * {@inheritdoc}
    */
-  protected function alterFields(array $fields = []) {
-    $fields['uid'] = $this->t('User ID');
-    $fields['name'] = $this->t('Username');
-    $fields['pass'] = $this->t('Password');
-    $fields['mail'] = $this->t('Email address');
+  protected function alterFields(array &$fields = []) {
+    // Add fields not defined in yml-file.
     $fields['signature'] = $this->t('Signature');
     $fields['signature_format'] = $this->t('Signature format');
     $fields['created'] = $this->t('Registered timestamp');
