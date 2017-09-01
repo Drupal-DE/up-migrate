@@ -1,0 +1,6 @@
+{
+  "name": "undpaul/up-migrate",
+  "description": "Provides some migration plugins and helpers",
+  "type": "drupal-module",
+  "license": "GPLv3"
+}
