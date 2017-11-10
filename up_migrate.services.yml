@@ -1,0 +1,5 @@
+services:
+  stream_wrapper.migration:
+    class: Drupal\up_migrate\StreamWrapper\MigrationStream
+    tags:
+      - { name: stream_wrapper, scheme: migration }
