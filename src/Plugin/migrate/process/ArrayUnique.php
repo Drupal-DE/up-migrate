@@ -10,7 +10,7 @@ use Drupal\migrate\Row;
  * This plugin removes duplicate values from source value.
  *
  * @MigrateProcessPlugin(
- *   id = "array_unique",
+ *   id = "up_array_unique",
  *   handle_multiples = TRUE
  * )
  */
