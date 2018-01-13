@@ -152,7 +152,7 @@ abstract class SqlBase extends CoreSqlBase {
    */
   protected function initDatabases() {
     if (($databases = $this->state->get('up_migrate.databases')) === NULL) {
-      throw new MigrateException('No source databases defined. Run `drush upm-database-add` to add at a database.');
+      throw new MigrateException('No source databases defined. Run `drush upm-database-add` to add a database.');
     }
     foreach ($databases as $key => $info) {
       // No need to check if the connection has been added before, since
